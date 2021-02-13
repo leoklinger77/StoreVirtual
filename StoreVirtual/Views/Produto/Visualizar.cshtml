@@ -1,2 +1,14 @@
-﻿<h3>Product View</h3>
-<p>Leandro Klinger de Oliveira Proença</p>
+﻿@model StoreVirtual.Models.Produto
+<h3>Product View</h3>
+
+@{
+    string name = "Leandro Klinger de";
+
+}
+<p>@name</p>
+
+@name
+@Model.Id
+@Model.Nome
+@Model.Descricao
+@Model.Valor.ToString("C")

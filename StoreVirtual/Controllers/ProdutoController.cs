@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StoreVirtual.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,19 @@ namespace StoreVirtual.Controllers
     {
         public ActionResult Visualizar()
         {
-            return View();
+            Produto view = GetProduto();
+            return View(view);
+        }
+
+        private Produto GetProduto()
+        {
+            return new Produto
+            {
+                Id = 1,
+                Descricao = "Descricao",
+                Nome = "Nome",
+                Valor = 25.50M
+            };
         }
     }
 }
