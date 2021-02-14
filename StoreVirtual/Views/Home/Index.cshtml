@@ -159,9 +159,12 @@
         </div> <!-- row.// -->
     </div>
 </main>
-@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+
+
+
+@using (Html.BeginForm(null, null, null, FormMethod.Post, false, new { @action = @Url.Action("Index", "Home") + "#formulario" }))
 {
-    <div class="container">
+    <div class="container" id="formulario">
         <div class="row">
             <div class="col-sm-6 offset-sm-2">
                 @if (TempData["MSG_S"] != null)
@@ -175,7 +178,7 @@
             </div>
             <div class="col-sm-6 offset-sm-2">
                 <div class="form-group">
-                    
+
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-envelope"></i></span>
