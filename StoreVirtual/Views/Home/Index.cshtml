@@ -1,5 +1,5 @@
-﻿
-@{    
+﻿@model StoreVirtual.Models.NewsLetterEmail
+@{
     ViewData["Title"] = "Index";
 }
 
@@ -158,5 +158,38 @@
             </div> <!-- col // -->
         </div> <!-- row.// -->
     </div>
- </main>
+</main>
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-2">
+                @if (TempData["MSG_S"] != null)
+                {
+                    <p class="alert alert-success">@TempData["MSG_S"]</p>
+                }
+                @if (TempData["MSG_E"] != null)
+                {
+                    <p class="alert alert-danger">@Html.Raw(TempData["MSG_E"])</p>
+                }
+            </div>
+            <div class="col-sm-6 offset-sm-2">
+                <div class="form-group">
+                    
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                        </div>
+
+                        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { placeholder = "Cadastre seu e-mail para receber promoções", @class = "form-control" } })
+                    </div>
+                    <span class="text-danger">@Html.ValidationMessageFor(m => m.Email)</span>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <button class="subscribe btn btn-primary btn-block" type="submit"> Cadastrar </button>
+            </div>
+        </div>
+    </div>
+}
 

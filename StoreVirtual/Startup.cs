@@ -5,10 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StoreVirtual.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.EntityFrameworkCore;
 
 namespace StoreVirtual
 {
@@ -25,7 +28,11 @@ namespace StoreVirtual
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            //services.AddControllersWithViews().AddSessionStateTempDataProvider();
+
+            string connection = "Server=SERVER;Database=StoreVirtual;User Id=Developer;Password=@123Leo;";
+
+            services.AddDbContext<StoreVirtualContext>(options => options.UseSqlServer(connection));
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

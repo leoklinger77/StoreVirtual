@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StoreVirtual.Data;
 using StoreVirtual.Models;
 using StoreVirtual.Service.Email;
 using System;
@@ -10,11 +11,34 @@ namespace StoreVirtual.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly StoreVirtualContext _context;
 
+        public HomeController(StoreVirtualContext context)
+        {
+            _context = context;
+        }
+
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Index(NewsLetterEmail newsLetterEmail)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.NewsLetterEmail.Add(newsLetterEmail);
+                _context.SaveChanges();
+
+                TempData["MSG_S"] = "E-mail Cadastrado! Agora você ira receber promoções no seu e-mail!";
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(nameof(Index), newsLetterEmail);
+        }
+
         [HttpGet]
         public IActionResult Contato()
         {
