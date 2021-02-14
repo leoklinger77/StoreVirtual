@@ -38,8 +38,14 @@
                 <div>
                     <article class="card">
                         <div class="card-body p-5">
-                            <p class="alert alert-success">Mensagem de sucesso!</p>
-
+                            @if (TempData["MSG_S"] != null)
+                            {
+                                <p class="alert alert-success">@TempData["MSG_S"]</p>
+                            }
+                            @if (TempData["MSG_E"] != null)
+                            {
+                                <p class="alert alert-danger">@TempData["MSG_E"]</p>
+                            }
                             <form role="form" method="post" action="/home/ContatoAcao">
                                 <div class="form-group">
                                     <label for="nome">Nome</label>
