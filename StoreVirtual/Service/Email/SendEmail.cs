@@ -10,7 +10,7 @@ namespace StoreVirtual.Service.Email
         {
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential("noreply.leandroklinger@gmail.com", "");
+            smtp.Credentials = new NetworkCredential("noreply.leandroklinger@gmail.com", "!@#LEO!@#klinger");
             smtp.EnableSsl = true;
 
             string corpMsg = string.Format("<h2>Contato Loja Virtual</h2>" +

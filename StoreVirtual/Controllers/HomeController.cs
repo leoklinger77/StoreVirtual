@@ -39,6 +39,7 @@ namespace StoreVirtual.Controllers
                 {
                     SendEmail.EnviarContatoEmail(contato);
                     TempData["MSG_S"] = "Mensagem de contato enviado com sucesso!";
+                    return RedirectToAction(nameof(Contato));
                 }
                 else
                 {
@@ -48,9 +49,9 @@ namespace StoreVirtual.Controllers
                         sb.Append(item.ErrorMessage + "<br/>");
                     }
 
-                    TempData["MSG_E"] = sb.ToString();
+                    TempData["MSG_E"] = sb.ToString();                    
                 }
-                return RedirectToAction(nameof(Contato));
+                return View(nameof(Contato),contato);
 
             }
             catch (Exception)

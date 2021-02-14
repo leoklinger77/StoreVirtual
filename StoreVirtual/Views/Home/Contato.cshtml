@@ -1,6 +1,6 @@
-﻿
+﻿@model StoreVirtual.Models.Contato
 @{
-    ViewData["Title"] = "Contato";
+    ViewData["Title"] = "Contato";    
 }
 
 <main role="main">
@@ -44,7 +44,7 @@
                             }
                             @if (TempData["MSG_E"] != null)
                             {
-                                <p class="alert alert-danger">@TempData["MSG_E"]</p>
+                                <p class="alert alert-danger">@Html.Raw(TempData["MSG_E"])</p>
                             }
                             <form role="form" method="post" action="/home/ContatoAcao">
                                 <div class="form-group">
@@ -54,7 +54,7 @@
                                             <span class="input-group-text"><i class="fa fa-user"></i></span>
                                         </div>
                                         <input type="text" class="form-control" id="nome" name="nome" placeholder=""
-                                               required="">
+                                               required="" value="@(Model != null ? Model.Name : null)">
                                     </div>
                                 </div>
 
@@ -64,7 +64,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-at"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" name="email" id="email" placeholder="">
+                                        <input type="text" class="form-control" name="email" id="email" placeholder="" value="@(Model != null ? Model.Email : null)">
                                     </div>
                                 </div>
 
@@ -73,7 +73,7 @@
                                         <div class="form-group">
                                             <label for="texto"><span class="hidden-xs">Texto</span> </label>
                                             <div class="form-inline">
-                                                <textarea class="form-control" name="texto" id="texto" style="width:100%"></textarea>
+                                                <textarea class="form-control" name="texto" id="texto" style="width:100%">@(Model != null ? Model.Texto : null) </textarea>
 
                                             </div>
                                         </div>
