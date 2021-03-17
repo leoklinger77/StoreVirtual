@@ -93,9 +93,22 @@ namespace StoreVirtual.Controllers
         {
             return View();
         }
+        [HttpGet]
         public IActionResult CadastroCliente()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult CadastroCliente(Cliente cliente)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Cliente.Add(cliente);
+                _context.SaveChanges();
+                TempData["MSG_S"] = "Cadastro realizado com sucesso!";
+                return RedirectToAction(nameof(CadastroCliente));
+            }
+            return View(nameof(CadastroCliente),cliente);
         }
         public IActionResult CarrinhoCompras()
         {
