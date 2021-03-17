@@ -12,6 +12,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore;
+using StoreVirtual.Repositories.Interfaces;
+using StoreVirtual.Repositories;
 
 namespace StoreVirtual
 {
@@ -32,6 +34,9 @@ namespace StoreVirtual
             string connection = "Server=SERVER;Database=StoreVirtual;User Id=Developer;Password=@123Leo;";
 
             services.AddDbContext<StoreVirtualContext>(options => options.UseSqlServer(connection));
+
+            services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<INewsLetterEmailRepository, NewsLetterEmailRepository>();
             
         }
 
