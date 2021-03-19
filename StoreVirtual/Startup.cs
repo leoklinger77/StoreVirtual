@@ -31,8 +31,17 @@ namespace StoreVirtual
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-            string connection = "Server=SERVER;Database=StoreVirtual;User Id=Developer;Password=@123Leo;";
+            //Configureação de Session
+            services.AddMemoryCache();
+            services.AddSession(options => 
+            {
+                options.Cookie.Name = ".AdventureWorks.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(3600);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
+            string connection = "Server=SERVER;Database=StoreVirtual;User Id=Developer;Password=@123Leo;";
             services.AddDbContext<StoreVirtualContext>(options => options.UseSqlServer(connection));
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
@@ -59,8 +68,8 @@ namespace StoreVirtual
 
             app.UseCookiePolicy(); // Usado para passar o TempData no RedirectToAction
             app.UseRouting();
-
             app.UseAuthorization();
+            app.UseSession();
 
 
             
