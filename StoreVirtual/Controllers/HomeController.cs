@@ -91,9 +91,23 @@ namespace StoreVirtual.Controllers
 
 
         }
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
+        }        
+        [HttpPost]
+        public IActionResult Login(Cliente cliente)
+        {
+            Cliente clienteDb = _cliente.Login(cliente.Email, cliente.Senha);
+            if (clienteDb != null)
+            {
+                return new ContentResult() { Content = "Logado" };
+            }
+            else
+            {
+                return new ContentResult() { Content = "Não" };
+            }            
         }
         [HttpGet]
         public IActionResult CadastroCliente()
