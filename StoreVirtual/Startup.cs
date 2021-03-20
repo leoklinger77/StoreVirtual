@@ -35,7 +35,7 @@ namespace StoreVirtual
             services.AddMemoryCache();
             services.AddSession(options => 
             {
-                options.Cookie.Name = ".AdventureWorks.Session";
+                options.Cookie.Name = ".Session";
                 options.IdleTimeout = TimeSpan.FromSeconds(3600);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;

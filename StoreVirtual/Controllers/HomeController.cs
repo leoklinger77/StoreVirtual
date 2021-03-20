@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using StoreVirtual.Data;
 using StoreVirtual.Models;
 using StoreVirtual.Repositories.Interfaces;
@@ -102,6 +103,9 @@ namespace StoreVirtual.Controllers
             Cliente clienteDb = _cliente.Login(cliente.Email, cliente.Senha);
             if (clienteDb != null)
             {
+                HttpContext.Session.Set("Id", new byte[] { 52 });
+                HttpContext.Session.SetString("Email",cliente.Email);
+                HttpContext.Session.SetInt32("CPF", 11212312);
                 return new ContentResult() { Content = "Logado" };
             }
             else
@@ -110,6 +114,22 @@ namespace StoreVirtual.Controllers
             }            
         }
         [HttpGet]
+
+        [HttpGet]
+        public IActionResult Painel()
+        {
+            byte[] userId;
+            if (HttpContext.Session.TryGetValue("Id",out userId))
+            {
+                return new ContentResult() { Content = "User " + userId[0] + " Email: " + HttpContext.Session.GetString("Email") + " Idade: " + HttpContext.Session.GetInt32("CPF") };
+            }
+            else
+            {
+                return new ContentResult() { Content = "Acesso negado" };
+            }
+
+            
+        }
         public IActionResult CadastroCliente()
         {
             return View();
