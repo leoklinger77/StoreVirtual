@@ -14,6 +14,14 @@
             <div id="code_login_1">
                 <div class="card">
                     <article class="card-body">
+                        @if (TempData["MSG_S"] != null)
+                        {
+                            <p class="alert alert-success">@TempData["MSG_S"]</p>
+                        }
+                        @if (TempData["MSG_E"] != null)
+                        {
+                            <p class="alert alert-danger">@Html.Raw(TempData["MSG_E"])</p>
+                        }
                         <a asp-action="CadastroCliente" asp-controller="Home" class="float-right btn btn-outline-primary">Cadastra-se</a>
                         <h4 class="card-title mb-4 mt-1">Entrar</h4>
                         <form method="post">
@@ -25,7 +33,7 @@
                                 <a class="float-right" href="#">Esqueceu?</a>
                                 <label>Senha</label>
                                 <input asp-for="Senha" class="form-control" placeholder="******" type="password">
-                            </div>                            
+                            </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block"> Acessar </button>
                             </div>

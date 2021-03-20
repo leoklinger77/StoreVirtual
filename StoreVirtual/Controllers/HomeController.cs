@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using StoreVirtual.Data;
 using StoreVirtual.Models;
 using StoreVirtual.Repositories.Interfaces;
 using StoreVirtual.Service.Email;
+using StoreVirtual.Service.Login;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,11 +15,13 @@ namespace StoreVirtual.Controllers
     {
         private readonly IClienteRepository _cliente;
         private readonly INewsLetterEmailRepository _newsLetter;
+        private readonly LoginCliente _loginCliente;
 
-        public HomeController(IClienteRepository cliente, INewsLetterEmailRepository newsLetter)
+        public HomeController(IClienteRepository cliente, INewsLetterEmailRepository newsLetter, LoginCliente loginCliente)
         {
             _cliente = cliente;
             _newsLetter = newsLetter;
+            _loginCliente = loginCliente;
         }
 
         [HttpGet]
@@ -33,7 +35,7 @@ namespace StoreVirtual.Controllers
         {
             if (ModelState.IsValid)
             {
-                _newsLetter.Insert(newsLetterEmail);               
+                _newsLetter.Insert(newsLetterEmail);
 
                 TempData["MSG_S"] = "E-mail Cadastrado! Agora você ira receber promoções no seu e-mail!";
 
@@ -76,9 +78,9 @@ namespace StoreVirtual.Controllers
                         sb.Append(item.ErrorMessage + "<br/>");
                     }
 
-                    TempData["MSG_E"] = sb.ToString();                    
+                    TempData["MSG_E"] = sb.ToString();
                 }
-                return View(nameof(Contato),contato);
+                return View(nameof(Contato), contato);
 
             }
             catch (Exception)
@@ -96,39 +98,34 @@ namespace StoreVirtual.Controllers
         public IActionResult Login()
         {
             return View();
-        }        
+        }
         [HttpPost]
         public IActionResult Login(Cliente cliente)
         {
             Cliente clienteDb = _cliente.Login(cliente.Email, cliente.Senha);
             if (clienteDb != null)
             {
-                HttpContext.Session.Set("Id", new byte[] { 52 });
-                HttpContext.Session.SetString("Email",cliente.Email);
-                HttpContext.Session.SetInt32("CPF", 11212312);
-                return new ContentResult() { Content = "Logado" };
+                _loginCliente.SetCliente(clienteDb);
+                return RedirectToAction(nameof(Painel));
             }
-            else
-            {
-                return new ContentResult() { Content = "Não" };
-            }            
+            TempData["MSG_E"] = "Verifique o Email ou a Senha";
+            return View(cliente);
         }
-        [HttpGet]
 
         [HttpGet]
         public IActionResult Painel()
         {
-            byte[] userId;
-            if (HttpContext.Session.TryGetValue("Id",out userId))
+            
+            if (_loginCliente.GetCliente() != null)
             {
-                return new ContentResult() { Content = "User " + userId[0] + " Email: " + HttpContext.Session.GetString("Email") + " Idade: " + HttpContext.Session.GetInt32("CPF") };
+                return new ContentResult() { Content = "User " + _loginCliente.GetCliente().Id + " Email: " + _loginCliente.GetCliente().Email + " Idade: " + _loginCliente.GetCliente().CPF };
             }
             else
             {
                 return new ContentResult() { Content = "Acesso negado" };
             }
 
-            
+
         }
         public IActionResult CadastroCliente()
         {
@@ -139,11 +136,11 @@ namespace StoreVirtual.Controllers
         {
             if (ModelState.IsValid)
             {
-                _cliente.Insert(cliente);                
+                _cliente.Insert(cliente);
                 TempData["MSG_S"] = "Cadastro realizado com sucesso!";
                 return RedirectToAction(nameof(CadastroCliente));
             }
-            return View(nameof(CadastroCliente),cliente);
+            return View(nameof(CadastroCliente), cliente);
         }
         public IActionResult CarrinhoCompras()
         {

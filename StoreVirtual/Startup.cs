@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using StoreVirtual.Repositories.Interfaces;
 using StoreVirtual.Repositories;
 using StoreVirtual.Service.Session;
+using StoreVirtual.Service.Login;
 
 namespace StoreVirtual
 {
@@ -47,6 +48,7 @@ namespace StoreVirtual
             services.AddDbContext<StoreVirtualContext>(options => options.UseSqlServer(connection));
 
             services.AddScoped<Session>();
+            services.AddScoped<LoginCliente>();
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<INewsLetterEmailRepository, NewsLetterEmailRepository>();

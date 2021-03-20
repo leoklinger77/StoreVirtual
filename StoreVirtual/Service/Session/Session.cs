@@ -5,9 +5,9 @@ namespace StoreVirtual.Service.Session
     public class Session
     {
 
-        private readonly HttpContextAccessor _context;
+        private readonly IHttpContextAccessor _context;
 
-        public Session(HttpContextAccessor httpContext)
+        public Session(IHttpContextAccessor httpContext)
         {
             _context = httpContext;
         }
@@ -33,7 +33,12 @@ namespace StoreVirtual.Service.Session
 
         public string GetConsult(string key)
         {
-            return _context.HttpContext.Session.GetString(key);
+            if (Exist(key))
+            {
+                return _context.HttpContext.Session.GetString(key);
+            }
+            return null;
+            
         }
         public bool Exist(string key)
         {
