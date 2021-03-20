@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using StoreVirtual.Repositories.Interfaces;
 using StoreVirtual.Repositories;
+using StoreVirtual.Service.Session;
 
 namespace StoreVirtual
 {
@@ -30,6 +31,7 @@ namespace StoreVirtual
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddHttpContextAccessor();
 
             //Configureação de Session
             services.AddMemoryCache();
@@ -44,8 +46,11 @@ namespace StoreVirtual
             string connection = "Server=SERVER;Database=StoreVirtual;User Id=Developer;Password=@123Leo;";
             services.AddDbContext<StoreVirtualContext>(options => options.UseSqlServer(connection));
 
+            services.AddScoped<Session>();
+
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<INewsLetterEmailRepository, NewsLetterEmailRepository>();
+            
             
         }
 
