@@ -36,7 +36,7 @@ namespace StoreVirtual
 
             //Configureação de Session
             services.AddMemoryCache();
-            services.AddSession(options => 
+            services.AddSession(options =>
             {
                 options.Cookie.Name = ".Session";
                 options.IdleTimeout = TimeSpan.FromSeconds(3600);
@@ -49,12 +49,13 @@ namespace StoreVirtual
 
             services.AddScoped<Session>();
             services.AddScoped<LoginCliente>();
+            services.AddScoped<LoginFuncionario>();
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<INewsLetterEmailRepository, NewsLetterEmailRepository>();
             services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
-            
-            
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,14 +81,18 @@ namespace StoreVirtual
             app.UseSession();
 
 
-            
+
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                  );
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-            
+
         }
     }
 }

@@ -8,11 +8,11 @@ namespace StoreVirtual.Repositories.Interfaces
 {
     public interface IClienteRepository
     {
-        Cliente Login(string email, string password);
-        Cliente FindById(int id);
-        ICollection<Cliente> FindAll();
-        void Insert(Cliente cliente);
-        void Update(Cliente cliente);
+        Funcionario Login(string email, string password);
+        Funcionario FindById(int id);
+        ICollection<Funcionario> FindAll();
+        void Insert(Funcionario cliente);
+        void Update(Funcionario cliente);
         void Delete(int id);
     }
 }

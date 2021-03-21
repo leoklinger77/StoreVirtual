@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace StoreVirtual.Models
 {
     [Table("Tb_Cliente")]
-    public class Cliente
+    public class Funcionario
     {
         public int Id { get; set; }
 

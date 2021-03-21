@@ -3,22 +3,22 @@ using StoreVirtual.Models;
 
 namespace StoreVirtual.Service.Login
 {
-    public class LoginCliente
+    public class LoginFuncionario
     {
         private readonly Session.Session _session;
         private string Key = ".Cliente";
 
-        public LoginCliente(Session.Session session)
+        public LoginFuncionario(Session.Session session)
         {
             _session = session;
         }
 
-        public void SetFuncionario(Funcionario cliente)
-        {           
-            _session.Insert(Key, JsonConvert.SerializeObject(cliente));
+        public void SetCliente(Funcionario funcinario)
+        {
+            _session.Insert(Key, JsonConvert.SerializeObject(funcinario));
         }
 
-        public Funcionario GetFuncionario()
+        public Funcionario GetCliente()
         {
             if (_session.GetConsult(Key) != null)
             {
@@ -26,7 +26,7 @@ namespace StoreVirtual.Service.Login
             }
 
             return null;
-            
+
         }
         public void Update(Funcionario cliente)
         {

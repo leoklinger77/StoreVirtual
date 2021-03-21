@@ -101,9 +101,9 @@ namespace StoreVirtual.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Login(Cliente cliente)
+        public IActionResult Login(Funcionario cliente)
         {
-            Cliente clienteDb = _cliente.Login(cliente.Email, cliente.Senha);
+            Funcionario clienteDb = _cliente.Login(cliente.Email, cliente.Senha);
             if (clienteDb != null)
             {
                 _loginCliente.SetCliente(clienteDb);
@@ -127,7 +127,7 @@ namespace StoreVirtual.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CadastroCliente(Cliente cliente)
+        public IActionResult CadastroCliente(Funcionario cliente)
         {
             if (ModelState.IsValid)
             {
