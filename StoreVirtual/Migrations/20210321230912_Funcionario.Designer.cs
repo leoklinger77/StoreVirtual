@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoreVirtual.Data;
 
 namespace StoreVirtual.Migrations
 {
     [DbContext(typeof(StoreVirtualContext))]
-    partial class StoreVirtualContextModelSnapshot : ModelSnapshot
+    [Migration("20210321230912_Funcionario")]
+    partial class Funcionario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

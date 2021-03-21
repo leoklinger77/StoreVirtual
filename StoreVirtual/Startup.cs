@@ -52,6 +52,7 @@ namespace StoreVirtual
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<INewsLetterEmailRepository, NewsLetterEmailRepository>();
+            services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
             
             
         }
