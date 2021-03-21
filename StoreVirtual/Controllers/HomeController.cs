@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using StoreVirtual.Models;
 using StoreVirtual.Repositories.Interfaces;
 using StoreVirtual.Service.Email;
+using StoreVirtual.Service.Filter;
 using StoreVirtual.Service.Login;
 using System;
 using System.Collections.Generic;
@@ -113,17 +114,11 @@ namespace StoreVirtual.Controllers
         }
 
         [HttpGet]
+        [ClientAuthorization]
         public IActionResult Painel()
         {
-            
-            if (_loginCliente.GetCliente() != null)
-            {
-                return new ContentResult() { Content = "User " + _loginCliente.GetCliente().Id + " Email: " + _loginCliente.GetCliente().Email + " Idade: " + _loginCliente.GetCliente().CPF };
-            }
-            else
-            {
-                return new ContentResult() { Content = "Acesso negado" };
-            }
+
+            return new ContentResult() { Content = "Est é o painel" };
 
 
         }
