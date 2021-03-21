@@ -1,18 +1,43 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using StoreVirtual.Repositories.Interfaces;
+using StoreVirtual.Service.Login;
 
 namespace StoreVirtual.Areas.Funcionario.Controllers
 {
     [Area("Funcionario")]
     public class HomeController : Controller
     {
+        private readonly IFuncionarioRepository _funcionarioRepository;
+        private readonly LoginFuncionario _loginFuncionario;
+
+        public HomeController(IFuncionarioRepository funcionarioRepository, LoginFuncionario loginFuncionario)
+        {
+            _funcionarioRepository = funcionarioRepository;
+            _loginFuncionario = loginFuncionario;
+        }
+
         public IActionResult Login()
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Login(Models.Funcionario funcionario)
+        {
+            Models.Funcionario funcionarioDB = _funcionarioRepository.Login(funcionario.Email, funcionario.Senha);
+            if (funcionarioDB != null)
+            {
+                _loginFuncionario.SetCliente(funcionarioDB);
+                return RedirectToAction(nameof(Painel));
+            }
+            TempData["MSG_E"] = "Verifique o Email ou a Senha";
+            return View(funcionario);
+        }
+        [HttpGet]
+        public IActionResult Painel()
+        {
+            return View();
+        }
+
         public IActionResult Forgot()
         {
             return View();
