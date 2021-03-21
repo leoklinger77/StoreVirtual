@@ -17,33 +17,33 @@ namespace StoreVirtual.Repositories
 
         public void Delete(int id)
         {
-            Funcionario cliente = FindById(id);
+            Cliente cliente = FindById(id);
             _context.Remove(cliente);
             _context.SaveChanges();
         }
 
-        public ICollection<Funcionario> FindAll()
+        public ICollection<Cliente> FindAll()
         {
             return _context.Cliente.ToList();
         }
 
-        public Funcionario FindById(int id)
+        public Cliente FindById(int id)
         {
-            return _context.Cliente.FirstOrDefault((System.Linq.Expressions.Expression<System.Func<Funcionario, bool>>)(x => x.Id == id));
+            return _context.Cliente.FirstOrDefault(x => x.Id == id);
         }
 
-        public void Insert(Funcionario cliente)
+        public void Insert(Cliente cliente)
         {
             _context.Cliente.Add(cliente);
             _context.SaveChanges();
         }
 
-        public Funcionario Login(string email, string password)
+        public Cliente Login(string email, string password)
         {
             return _context.Cliente.Where(x => x.Email == email && x.Senha == password).FirstOrDefault();
         }
 
-        public void Update(Funcionario cliente)
+        public void Update(Cliente cliente)
         {
             _context.Cliente.Update(cliente);
             _context.SaveChanges();

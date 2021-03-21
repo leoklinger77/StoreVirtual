@@ -13,12 +13,12 @@ namespace StoreVirtual.Service.Login
             _session = session;
         }
 
-        public void SetFuncionario(Funcionario cliente)
+        public void SetCliente(Cliente cliente)
         {           
             _session.Insert(Key, JsonConvert.SerializeObject(cliente));
         }
 
-        public Funcionario GetFuncionario()
+        public Funcionario GetCliente()
         {
             if (_session.GetConsult(Key) != null)
             {
@@ -28,7 +28,7 @@ namespace StoreVirtual.Service.Login
             return null;
             
         }
-        public void Update(Funcionario cliente)
+        public void Update(Cliente cliente)
         {
             _session.Update(Key, JsonConvert.SerializeObject(cliente));
         }

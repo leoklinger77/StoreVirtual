@@ -10,7 +10,7 @@ namespace StoreVirtual.Data
         {
         }
 
-        public DbSet<Funcionario> Cliente { get; set; }
+        public DbSet<Cliente> Cliente { get; set; }
         public DbSet<NewsLetterEmail> NewsLetterEmail { get; set; }
         public DbSet<Funcionario> Funcionario { get; set; }
     }
