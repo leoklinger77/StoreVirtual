@@ -4,6 +4,7 @@ using StoreVirtual.Models.Exceptions;
 using StoreVirtual.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using X.PagedList;
 
 namespace StoreVirtual.Repositories
 {
@@ -25,11 +26,12 @@ namespace StoreVirtual.Repositories
                 _context.SaveChanges();
             }
             throw new ExceptionNotFoundId();
-        }
+        }      
 
-        public ICollection<Categoria> FindAlls()
+        public IPagedList<Categoria> FindAlls(int? page)
         {
-            return _context.Categoria.ToList();
+            int numberOfPage = page ?? 1;
+            return _context.Categoria.ToPagedList<Categoria>(numberOfPage,10 );
         }
 
         public Categoria FindById(int id)

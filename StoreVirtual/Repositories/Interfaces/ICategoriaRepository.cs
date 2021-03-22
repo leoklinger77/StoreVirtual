@@ -1,5 +1,6 @@
 ﻿using StoreVirtual.Models;
 using System.Collections.Generic;
+using X.PagedList;
 
 namespace StoreVirtual.Repositories.Interfaces
 {
@@ -9,6 +10,6 @@ namespace StoreVirtual.Repositories.Interfaces
         void Update(Categoria categoria);
         void Delete(int id);
         Categoria FindById(int id);
-        ICollection<Categoria> FindAlls();
+        IPagedList<Categoria> FindAlls(int? page);
     }
 }

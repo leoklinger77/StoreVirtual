@@ -1,11 +1,16 @@
-﻿@model ICollection<StoreVirtual.Models.Categoria>
+﻿@model IPagedList<StoreVirtual.Models.Categoria>
 @{
     ViewData["Title"] = "Index";
 }
-
 <h1>Index</h1>
 
-@foreach (var item in Model)
+leandro
+@foreach (Categoria item in Model)
 {
-    @item
+    @item.Nome
+    <br />
+    
 }
+
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))

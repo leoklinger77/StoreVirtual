@@ -3,6 +3,7 @@ using StoreVirtual.Models;
 using StoreVirtual.Repositories.Interfaces;
 using StoreVirtual.Service.Filter;
 using System.Collections.Generic;
+using X.PagedList;
 
 namespace StoreVirtual.Areas.Funcionario.Controllers
 {
@@ -17,9 +18,10 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
             _categoriaRepository = categoriaRepository;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
-            ICollection<Categoria> list = _categoriaRepository.FindAlls();
+            IPagedList<Categoria> list = _categoriaRepository.FindAlls(page);           
+            
             return View(list);
         }
         [HttpGet]

@@ -10,6 +10,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="~/resources/lib/bootstrap-4.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/resources/lib/pagedList/pagedList.css" rel="stylesheet" type="text/css" />
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -39,7 +40,7 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
+    <link href="~/resources/lib/dashboard/dashboard.css" rel="stylesheet">
 </head>
 <body>
 
@@ -96,7 +97,7 @@
                                 <span data-feather="bar-chart-2"></span>
                                 Relatórios
                             </a>
-                        </li>                        
+                        </li>
                     </ul>
 
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -133,9 +134,10 @@
                     </ul>
                 </div>
             </nav>
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <main class="offset-2 col-lg-10">
                 @RenderBody()
             </main>
+            
         </div>
     </div>
 
