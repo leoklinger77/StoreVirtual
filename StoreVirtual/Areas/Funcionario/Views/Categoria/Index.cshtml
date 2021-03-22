@@ -1,0 +1,11 @@
+﻿@model ICollection<StoreVirtual.Models.Categoria>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@foreach (var item in Model)
+{
+    @item
+}
