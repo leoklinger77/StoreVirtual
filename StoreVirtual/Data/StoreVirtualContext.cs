@@ -13,5 +13,6 @@ namespace StoreVirtual.Data
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<NewsLetterEmail> NewsLetterEmail { get; set; }
         public DbSet<Funcionario> Funcionario { get; set; }
+        public DbSet<Categoria> Categoria { get; set; }
     }
 }

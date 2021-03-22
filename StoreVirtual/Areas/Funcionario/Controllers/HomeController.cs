@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StoreVirtual.Repositories.Interfaces;
+using StoreVirtual.Service.Filter;
 using StoreVirtual.Service.Login;
 
 namespace StoreVirtual.Areas.Funcionario.Controllers
@@ -33,17 +34,21 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
             return View(funcionario);
         }
         [HttpGet]
-        public IActionResult Painel()
-        {
-            return View();
-        }
-
+        [FuncionarioAuthorization]
         public IActionResult Forgot()
         {
-            return View();
+            _loginFuncionario.Remove();
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         public IActionResult Insert()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [FuncionarioAuthorization]
+        public IActionResult Painel()
         {
             return View();
         }
