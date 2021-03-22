@@ -1,4 +1,5 @@
-﻿using StoreVirtual.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using StoreVirtual.Data;
 using StoreVirtual.Models;
 using StoreVirtual.Models.Exceptions;
 using StoreVirtual.Repositories.Interfaces;
@@ -31,7 +32,7 @@ namespace StoreVirtual.Repositories
         public IPagedList<Categoria> FindAlls(int? page)
         {
             int numberOfPage = page ?? 1;
-            return _context.Categoria.ToPagedList<Categoria>(numberOfPage,10 );
+            return _context.Categoria.Include(x=>x.CategoriaPai).ToPagedList<Categoria>(numberOfPage,10 );
         }
 
         public Categoria FindById(int id)

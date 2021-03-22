@@ -33,6 +33,12 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
         [HttpPost]
         public IActionResult Insert(Categoria categoria)
         {
+            if (ModelState.IsValid)
+            {
+                _categoriaRepository.Insert(categoria);
+                TempData["MSG_S"] = "Registro salvo com sucesso";
+                return RedirectToAction(nameof(Index));
+            }
             return View();
         }
         [HttpGet]
