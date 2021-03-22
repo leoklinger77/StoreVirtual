@@ -7,6 +7,10 @@
 <a asp-action="Insert" class="btn btn-primary">Casdastrar</a>
 <br />
 <br />
+@if (@TempData["MSG_S"] != null)
+{
+    <p class="alert alert-success">@TempData["MSG_S"]</p>
+}
 @if (true)
 {
     <div class="table-responsive">

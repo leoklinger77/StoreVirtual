@@ -17,9 +17,10 @@
         <span asp-validation-for="Slug" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="CategoriaPai"></label>
-        <input asp-for="CategoriaPai" class="form-control" placeholder="Digite o slug" />
+        <label asp-for="CategoriaPaiId"></label>
+        <input asp-for="CategoriaPaiId" class="form-control" placeholder="Digite a Categoria Pai" />
         <span asp-validation-for="CategoriaPai" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Salvar</button>
+    <button asp-action="Index" class="btn btn-secondary">Voltar</button>
 </form>
