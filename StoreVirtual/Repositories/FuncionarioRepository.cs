@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using StoreVirtual.Data;
 using StoreVirtual.Models;
 using StoreVirtual.Repositories.Interfaces;
@@ -37,6 +38,11 @@ namespace StoreVirtual.Repositories
         {
             int numberOfPage = page ?? 1;
             return _context.Funcionario.ToPagedList<Funcionario>(numberOfPage, _configuration.GetValue<int>("RegistroPorPagina"));
+        }
+
+        public ICollection<Funcionario> FindByEmails(string email)
+        {
+            return _context.Funcionario.Where(x => x.Email == email).AsNoTracking().ToList();
         }
 
         public Funcionario FindById(int id)

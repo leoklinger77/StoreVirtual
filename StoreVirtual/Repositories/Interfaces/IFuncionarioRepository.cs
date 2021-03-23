@@ -17,6 +17,7 @@ namespace StoreVirtual.Repositories.Interfaces
         IPagedList<Funcionario> FindAlls(int? page);
         Funcionario FindById(int id);
         void UpdateSenha(Funcionario funcionario);
+        ICollection<Funcionario> FindByEmails(string email);
     }
 }
 
