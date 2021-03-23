@@ -19,8 +19,9 @@ namespace StoreVirtual.Models
         [MinLength(6, ErrorMessageResourceType = typeof(Message), ErrorMessageResourceName = "MSG_E002")]
         public string Senha { get; set; }
         [NotMapped]
-        public string ConfirmarSenha { get; set; }
-        [Required(ErrorMessageResourceType = typeof(Message), ErrorMessageResourceName = "MSG_E001")]
+        [Display(Name = "Confirmar Senha")]
+        [Compare("Senha", ErrorMessageResourceType = typeof(Message), ErrorMessageResourceName = "MSG_E005")]
+        public string ConfirmarSenha { get; set; }        
         public string Tipo { get; set; }
 
         public Funcionario()

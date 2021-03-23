@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using StoreVirtual.Models;
 using StoreVirtual.Repositories.Interfaces;
 using StoreVirtual.Service.Filter;
+using StoreVirtual.Service.Lang;
 using System.Collections.Generic;
 using System.Linq;
 using X.PagedList;
@@ -39,7 +40,7 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
             if (ModelState.IsValid)
             {
                 _categoriaRepository.Insert(categoria);
-                TempData["MSG_S"] = "Registro salvo com sucesso";
+                TempData["MSG_S"] = Message.MSG_S006;
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.Categoria = _categoriaRepository.FindAlls().Select(x=> new SelectListItem(x.Nome,x.Id.ToString()));
@@ -58,7 +59,7 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
             if (ModelState.IsValid)
             {
                 _categoriaRepository.Update(categoria);
-                TempData["MSG_S"] = "Registro alterado com sucesso";
+                TempData["MSG_S"] = Message.MSG_S007;
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.Categoria = _categoriaRepository.FindAlls().Where(x => x.Id != id).Select(x => new SelectListItem(x.Nome, x.Id.ToString()));
@@ -69,7 +70,7 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
         public IActionResult Remove(int id)
         {
             _categoriaRepository.Delete(id);
-            TempData["MSG_S"] = "Registro excluido com sucesso";
+            TempData["MSG_S"] = Message.MSG_S008;
             return RedirectToAction(nameof(Index));
         }
     }

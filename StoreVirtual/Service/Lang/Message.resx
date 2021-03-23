@@ -129,4 +129,16 @@
   <data name="MSG_E004" xml:space="preserve">
     <value>O Campo {0} não é válido!</value>
   </data>
+  <data name="MSG_E005" xml:space="preserve">
+    <value>O valor não confere com {1}</value>
+  </data>
+  <data name="MSG_S006" xml:space="preserve">
+    <value>Registro salvo com sucesso!</value>
+  </data>
+  <data name="MSG_S007" xml:space="preserve">
+    <value>Registro alterado com sucesso!</value>
+  </data>
+  <data name="MSG_S008" xml:space="preserve">
+    <value>Registro excluido com sucesso!</value>
+  </data>
 </root>

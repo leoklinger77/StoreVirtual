@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StoreVirtual.Repositories.Interfaces;
+using StoreVirtual.Service.Lang;
 using X.PagedList;
 
 namespace StoreVirtual.Areas.Funcionario.Controllers
@@ -27,6 +28,14 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
         [HttpPost]
         public IActionResult Insert(Models.Funcionario funcionario)
         {
+            funcionario.Tipo = "C";
+            if (ModelState.IsValid)
+            {
+                _funcionarioRepository.Insert(funcionario);
+                TempData["MSG_S"] = Message.MSG_S006;
+
+                return RedirectToAction(nameof(Index));
+            }
             return View();
         }
         [HttpGet]

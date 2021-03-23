@@ -95,5 +95,41 @@ namespace StoreVirtual.Service.Lang {
                 return ResourceManager.GetString("MSG_E004", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O valor não confere com {1}.
+        /// </summary>
+        public static string MSG_E005 {
+            get {
+                return ResourceManager.GetString("MSG_E005", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registro salvo com sucesso!.
+        /// </summary>
+        public static string MSG_S006 {
+            get {
+                return ResourceManager.GetString("MSG_S006", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registro alterado com sucesso!.
+        /// </summary>
+        public static string MSG_S007 {
+            get {
+                return ResourceManager.GetString("MSG_S007", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registro excluido com sucesso!.
+        /// </summary>
+        public static string MSG_S008 {
+            get {
+                return ResourceManager.GetString("MSG_S008", resourceCulture);
+            }
+        }
     }
 }
