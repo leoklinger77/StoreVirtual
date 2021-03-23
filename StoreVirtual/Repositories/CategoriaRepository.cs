@@ -35,6 +35,11 @@ namespace StoreVirtual.Repositories
             return _context.Categoria.Include(x=>x.CategoriaPai).ToPagedList<Categoria>(numberOfPage,10 );
         }
 
+        public ICollection<Categoria> FindAlls()
+        {
+            return _context.Categoria.ToList();
+        }
+
         public Categoria FindById(int id)
         {
             return _context.Categoria.FirstOrDefault(x => x.Id == id);

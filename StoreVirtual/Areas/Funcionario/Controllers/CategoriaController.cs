@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using StoreVirtual.Models;
 using StoreVirtual.Repositories.Interfaces;
 using StoreVirtual.Service.Filter;
 using System.Collections.Generic;
+using System.Linq;
 using X.PagedList;
 
 namespace StoreVirtual.Areas.Funcionario.Controllers
@@ -27,6 +29,7 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
         [HttpGet]
         public IActionResult Insert()
         {
+            ViewBag.Categoria = _categoriaRepository.FindAlls().Select(x => new SelectListItem(x.Nome, x.Id.ToString()));
             return View();
         }
 
@@ -39,6 +42,7 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
                 TempData["MSG_S"] = "Registro salvo com sucesso";
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Categoria = _categoriaRepository.FindAlls().Select(x=> new SelectListItem(x.Nome,x.Id.ToString()));
             return View();
         }
         [HttpGet]

@@ -11,5 +11,6 @@ namespace StoreVirtual.Repositories.Interfaces
         void Delete(int id);
         Categoria FindById(int id);
         IPagedList<Categoria> FindAlls(int? page);
+        ICollection<Categoria> FindAlls();
     }
 }
