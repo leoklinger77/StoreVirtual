@@ -7,6 +7,11 @@ namespace StoreVirtual.Service.Filter
 {
     public class FuncionarioAuthorizationAttribute : Attribute, IAuthorizationFilter
     {
+        private string _tipoColaboradorAuthorization;
+        public FuncionarioAuthorizationAttribute(string TipoColaboradorAuthorization = "C")
+        {
+            _tipoColaboradorAuthorization = TipoColaboradorAuthorization;
+        }
         private LoginFuncionario _loginFuncionario;
         public void OnAuthorization(AuthorizationFilterContext context)
         {
@@ -14,6 +19,13 @@ namespace StoreVirtual.Service.Filter
             if (_loginFuncionario.GetCliente() == null)
             {
                 context.Result = new RedirectToActionResult("Login", "Home", null);
+            }
+            else
+            {
+                if (_loginFuncionario.GetCliente().Tipo == "C" && _tipoColaboradorAuthorization == "G")
+                {
+                    context.Result = new ForbidResult();
+                }
             }
         }
     }

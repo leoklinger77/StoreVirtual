@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StoreVirtual.Repositories.Interfaces;
 using StoreVirtual.Service.Email;
+using StoreVirtual.Service.Filter;
 using StoreVirtual.Service.KeyGenerator;
 using StoreVirtual.Service.Lang;
 using X.PagedList;
@@ -8,6 +9,7 @@ using X.PagedList;
 namespace StoreVirtual.Areas.Funcionario.Controllers
 {
     [Area("Funcionario")]
+    [FuncionarioAuthorization("G")]
     public class FuncionarioController : Controller
     {
         private readonly IFuncionarioRepository _funcionarioRepository;

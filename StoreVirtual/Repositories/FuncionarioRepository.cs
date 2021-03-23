@@ -9,6 +9,7 @@ using X.PagedList;
 
 namespace StoreVirtual.Repositories
 {
+    
     public class FuncionarioRepository : IFuncionarioRepository
     {
         private readonly StoreVirtualContext _context;
