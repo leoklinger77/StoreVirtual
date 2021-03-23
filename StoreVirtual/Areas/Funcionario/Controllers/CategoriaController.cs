@@ -46,13 +46,22 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Update()
+        public IActionResult Update(int id)
         {
-            return View();
+            Categoria cat = _categoriaRepository.FindById(id);
+            ViewBag.Categoria = _categoriaRepository.FindAlls().Where(x=>x.Id != id).Select(x => new SelectListItem(x.Nome, x.Id.ToString()));
+            return View(cat);
         }
         [HttpPost]
-        public IActionResult Update(Categoria categoria)
+        public IActionResult Update(Categoria categoria, int id)
         {
+            if (ModelState.IsValid)
+            {
+                _categoriaRepository.Update(categoria);
+                TempData["MSG_S"] = "Registro alterado com sucesso";
+                return RedirectToAction(nameof(Index));
+            }
+            ViewBag.Categoria = _categoriaRepository.FindAlls().Where(x => x.Id != id).Select(x => new SelectListItem(x.Nome, x.Id.ToString()));
             return View();
         }
 
