@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using StoreVirtual.Data;
 using StoreVirtual.Models;
 using StoreVirtual.Models.Exceptions;
@@ -12,10 +13,12 @@ namespace StoreVirtual.Repositories
     public class CategoriaRepository : ICategoriaRepository
     {
         private readonly StoreVirtualContext _context;
+        private readonly IConfiguration _configuration;
 
-        public CategoriaRepository(StoreVirtualContext context)
+        public CategoriaRepository(StoreVirtualContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public void Delete(int id)
@@ -33,7 +36,7 @@ namespace StoreVirtual.Repositories
         public IPagedList<Categoria> FindAlls(int? page)
         {
             int numberOfPage = page ?? 1;
-            return _context.Categoria.Include(x=>x.CategoriaPai).ToPagedList<Categoria>(numberOfPage,10 );
+            return _context.Categoria.Include(x=>x.CategoriaPai).ToPagedList<Categoria>(numberOfPage, _configuration.GetValue<int>("RegistroPorPagina"));
         }
 
         public ICollection<Categoria> FindAlls()

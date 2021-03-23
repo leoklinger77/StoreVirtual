@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace StoreVirtual.Repositories.Interfaces
 {
@@ -13,6 +14,7 @@ namespace StoreVirtual.Repositories.Interfaces
         void Update(Funcionario funcionario);
         void Delete(int id);
         ICollection<Funcionario> FindAlls();
+        IPagedList<Funcionario> FindAlls(int? page);
         Funcionario FindById(int id);
     }
 }

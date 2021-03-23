@@ -1,20 +1,25 @@
-﻿using StoreVirtual.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using StoreVirtual.Data;
 using StoreVirtual.Models;
 using StoreVirtual.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace StoreVirtual.Repositories
 {
     public class FuncionarioRepository : IFuncionarioRepository
     {
         private readonly StoreVirtualContext _context;
+        private readonly IConfiguration _configuration;
 
-        public FuncionarioRepository(StoreVirtualContext context)
+        public FuncionarioRepository(StoreVirtualContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public void Delete(int id)
@@ -27,6 +32,12 @@ namespace StoreVirtual.Repositories
         public ICollection<Funcionario> FindAlls()
         {
             return _context.Funcionario.ToList();
+        }
+
+        public IPagedList<Funcionario> FindAlls(int? page)
+        {
+            int numberOfPage = page ?? 1;
+            return _context.Funcionario.ToPagedList<Funcionario>(numberOfPage, _configuration.GetValue<int>("RegistroPorPagina"));
         }
 
         public Funcionario FindById(int id)
