@@ -13,7 +13,7 @@ namespace StoreVirtual.Service.Filter
             _loginCliente = (LoginCliente)context.HttpContext.RequestServices.GetService(typeof(LoginCliente));
             if (_loginCliente.GetCliente() == null)
             {
-                context.Result = new ContentResult() { Content = "Acesso negado" };
+                context.Result = new RedirectToActionResult("Login", "Home", null);
             }
         }
     }

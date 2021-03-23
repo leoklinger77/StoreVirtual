@@ -12,8 +12,10 @@ namespace StoreVirtual.Models
         public string Nome { get; set; }
         [Required(ErrorMessageResourceType = typeof(Message), ErrorMessageResourceName = "MSG_E001")]
         [MinLength(3, ErrorMessageResourceType = typeof(Message), ErrorMessageResourceName = "MSG_E002")]
+        
         public string Slug { get; set; }
         [ForeignKey("CategoriaPaiId")]
+        [Display(Name = "Categoria Pai")]
         public virtual Categoria CategoriaPai { get; set; }        
         public int? CategoriaPaiId { get; set; }
 

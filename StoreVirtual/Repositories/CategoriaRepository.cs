@@ -25,6 +25,7 @@ namespace StoreVirtual.Repositories
             {
                 _context.Remove(c);
                 _context.SaveChanges();
+                return;
             }
             throw new ExceptionNotFoundId();
         }      

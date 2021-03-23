@@ -2,9 +2,6 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using StoreVirtual.Service.Login;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StoreVirtual.Service.Filter
 {
@@ -16,7 +13,7 @@ namespace StoreVirtual.Service.Filter
             _loginFuncionario = (LoginFuncionario)context.HttpContext.RequestServices.GetService(typeof(LoginFuncionario));
             if (_loginFuncionario.GetCliente() == null)
             {
-                context.Result = new ContentResult() { Content = "Acesso negado" };
+                context.Result = new RedirectToActionResult("Login", "Home", null);
             }
         }
     }

@@ -68,7 +68,9 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
         [HttpGet]
         public IActionResult Remove(int id)
         {
-            return View();
+            _categoriaRepository.Delete(id);
+            TempData["MSG_S"] = "Registro excluido com sucesso";
+            return RedirectToAction(nameof(Index));
         }
     }
 }
