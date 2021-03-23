@@ -1,12 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using StoreVirtual.Data;
 using StoreVirtual.Models;
 using StoreVirtual.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using X.PagedList;
 
 namespace StoreVirtual.Repositories
@@ -58,7 +56,17 @@ namespace StoreVirtual.Repositories
 
         public void Update(Funcionario funcionario)
         {
+            _context.Update(funcionario);
+            _context.Entry(funcionario).Property(x => x.Senha).IsModified = false;
+            _context.SaveChanges();
+        }
+
+        public void UpdateSenha(Funcionario funcionario)
+        {
             _context.Funcionario.Update(funcionario);
+            _context.Entry(funcionario).Property(x => x.Nome).IsModified = false;
+            _context.Entry(funcionario).Property(x => x.Tipo).IsModified = false;
+            _context.Entry(funcionario).Property(x => x.Email).IsModified = false;
             _context.SaveChanges();
         }
     }

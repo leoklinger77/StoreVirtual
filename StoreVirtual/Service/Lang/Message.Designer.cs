@@ -131,5 +131,14 @@ namespace StoreVirtual.Service.Lang {
                 return ResourceManager.GetString("MSG_S008", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Senha reenviada com sucesso!.
+        /// </summary>
+        public static string MSG_S009 {
+            get {
+                return ResourceManager.GetString("MSG_S009", resourceCulture);
+            }
+        }
     }
 }

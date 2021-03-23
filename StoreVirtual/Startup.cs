@@ -16,6 +16,9 @@ using StoreVirtual.Repositories.Interfaces;
 using StoreVirtual.Repositories;
 using StoreVirtual.Service.Session;
 using StoreVirtual.Service.Login;
+using System.Net.Mail;
+using System.Net;
+using StoreVirtual.Service.Email;
 
 namespace StoreVirtual
 {
@@ -34,6 +37,23 @@ namespace StoreVirtual
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddHttpContextAccessor();
 
+            //SMTP
+            services.AddScoped<SmtpClient>(optins =>
+            {
+                SmtpClient smtp = new SmtpClient()
+                {
+                    Host = Configuration.GetValue<string>("Email:ServerSMTP"),
+                    Port = Configuration.GetValue<int>("Email:Port"),
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(Configuration.GetValue<string>("Email:UserName"), Configuration.GetValue<string>("Email:Password")),
+                    EnableSsl = true
+                };
+
+                return smtp;
+            });
+
+
+
             //Configureação de Session
             services.AddMemoryCache();
             services.AddSession(options =>
@@ -49,7 +69,9 @@ namespace StoreVirtual
 
             services.AddScoped<Session>();
             services.AddScoped<LoginCliente>();
-            services.AddScoped<LoginFuncionario>();
+            services.AddScoped<LoginFuncionario>();            
+            services.AddScoped<SendEmail>();
+            
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<INewsLetterEmailRepository, NewsLetterEmailRepository>();

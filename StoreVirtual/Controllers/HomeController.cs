@@ -17,12 +17,14 @@ namespace StoreVirtual.Controllers
         private readonly IClienteRepository _cliente;
         private readonly INewsLetterEmailRepository _newsLetter;
         private readonly LoginCliente _loginCliente;
+        private readonly SendEmail _sendEmail;
 
-        public HomeController(IClienteRepository cliente, INewsLetterEmailRepository newsLetter, LoginCliente loginCliente)
+        public HomeController(IClienteRepository cliente, INewsLetterEmailRepository newsLetter, LoginCliente loginCliente, SendEmail sendEmail)
         {
             _cliente = cliente;
             _newsLetter = newsLetter;
             _loginCliente = loginCliente;
+            _sendEmail = sendEmail;
         }
 
         [HttpGet]
@@ -67,7 +69,7 @@ namespace StoreVirtual.Controllers
 
                 if (isValid)
                 {
-                    SendEmail.EnviarContatoEmail(contato);
+                    _sendEmail.EnviarContatoEmail(contato);
                     TempData["MSG_S"] = "Mensagem de contato enviado com sucesso!";
                     return RedirectToAction(nameof(Contato));
                 }

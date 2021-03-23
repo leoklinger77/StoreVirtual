@@ -1,17 +1,23 @@
-﻿using StoreVirtual.Models;
-using System.Net;
+﻿using Microsoft.Extensions.Configuration;
+using StoreVirtual.Models;
 using System.Net.Mail;
 
 namespace StoreVirtual.Service.Email
 {
     public class SendEmail
     {
-        public static void EnviarContatoEmail(Contato contato)
+
+        private readonly SmtpClient _smtp;
+        private readonly IConfiguration _configuration;
+
+        public SendEmail(SmtpClient smtp, IConfiguration configuration)
         {
-            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-            smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential("noreply.leandroklinger@gmail.com", "!@#LEO!@#klinger");
-            smtp.EnableSsl = true;
+            _smtp = smtp;
+            _configuration = configuration;
+        }
+
+        public void EnviarContatoEmail(Contato contato)
+        {
 
             string corpMsg = string.Format("<h2>Contato Loja Virtual</h2>" +
                 "<b>Nome: </b> {0} <br/>" +
@@ -20,13 +26,30 @@ namespace StoreVirtual.Service.Email
                 "<p>E-mail enviado automaticamente do site Loja Virtual</p>",contato.Name,contato.Email,contato.Texto);
 
             MailMessage message = new MailMessage();
-            message.From = new MailAddress("noreply.leandroklinger@gmail.com");
+            message.From = new MailAddress(_configuration.GetValue<string>("Email:UserName"));
             message.To.Add(contato.Email);
             message.Subject = "Contato - Loja Virtual";
             message.Body = corpMsg;
             message.IsBodyHtml = true; //True caso vc queira que o body seja enviado html
 
-            smtp.Send(message);
+            _smtp.Send(message);
+        }
+
+        public void EnviarSenha(Funcionario funcionario)
+        {
+            string corpMsg = string.Format("<h2>Contato Loja Virtual</h2>" +
+                "<b>Sua senha é : </b><br/>" +
+                "<h3>{0}</h3>  <br/>" +                
+                "<p>E-mail enviado automaticamente do site Loja Virtual</p>", funcionario.Senha);
+
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(_configuration.GetValue<string>("Email:UserName"));
+            message.To.Add(funcionario.Email);
+            message.Subject = "Contato - Loja Virtual";
+            message.Body = corpMsg;
+            message.IsBodyHtml = true; //True caso vc queira que o body seja enviado html
+
+            _smtp.Send(message);
         }
     }
 }

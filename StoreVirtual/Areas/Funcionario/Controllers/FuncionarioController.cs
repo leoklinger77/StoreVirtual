@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StoreVirtual.Repositories.Interfaces;
+using StoreVirtual.Service.Email;
 using StoreVirtual.Service.KeyGenerator;
 using StoreVirtual.Service.Lang;
 using X.PagedList;
@@ -10,10 +11,12 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
     public class FuncionarioController : Controller
     {
         private readonly IFuncionarioRepository _funcionarioRepository;
+        private readonly SendEmail _sendEmail;
 
-        public FuncionarioController(IFuncionarioRepository funcionarioRepository)
+        public FuncionarioController(IFuncionarioRepository funcionarioRepository, SendEmail sendEmail)
         {
             _funcionarioRepository = funcionarioRepository;
+            _sendEmail = sendEmail;
         }
 
         public IActionResult Index(int? page)
@@ -29,10 +32,15 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
         [HttpPost]
         public IActionResult Insert(Models.Funcionario funcionario)
         {
-            funcionario.Tipo = "C";
+            
+            ModelState.Remove("Senha");
+            ModelState.Remove("ConfirmarSenha");
             if (ModelState.IsValid)
             {
+                funcionario.Tipo = "C";
+                funcionario.Senha = KeyGenerator.GetUniqueKey(6);
                 _funcionarioRepository.Insert(funcionario);
+                _sendEmail.EnviarSenha(funcionario);
                 TempData["MSG_S"] = Message.MSG_S006;
 
                 return RedirectToAction(nameof(Index));
@@ -44,9 +52,9 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
         {
             Models.Funcionario func = _funcionarioRepository.FindById(id);
             func.Senha = KeyGenerator.GetUniqueKey(6);
-            _funcionarioRepository.Update(func);
-            TempData["MSG_S"] = "Senha alterado com sucesso";
-
+            _funcionarioRepository.UpdateSenha(func);
+            _sendEmail.EnviarSenha(func);
+            TempData["MSG_S"] = Message.MSG_S009;
             return RedirectToAction(nameof(Index));
         }
 
@@ -59,9 +67,11 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
         [HttpPost]
         public IActionResult Update(Models.Funcionario funcionario, int id)
         {
+            ModelState.Remove("Senha");
             ModelState.Remove("ConfirmarSenha");
             if (ModelState.IsValid)
             {
+                
                 _funcionarioRepository.Update(funcionario);
                 TempData["MSG_S"] = Message.MSG_S007;
                 return RedirectToAction(nameof(Index));
