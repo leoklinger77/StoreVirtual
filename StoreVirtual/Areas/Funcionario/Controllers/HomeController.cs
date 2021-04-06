@@ -22,6 +22,7 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Login(Models.Funcionario funcionario)
         {
             Models.Funcionario funcionarioDB = _funcionarioRepository.Login(funcionario.Email, funcionario.Senha);

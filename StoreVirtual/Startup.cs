@@ -19,6 +19,7 @@ using StoreVirtual.Service.Login;
 using System.Net.Mail;
 using System.Net;
 using StoreVirtual.Service.Email;
+using StoreVirtual.Service.Middleware;
 
 namespace StoreVirtual
 {
@@ -102,8 +103,7 @@ namespace StoreVirtual
             app.UseRouting();
             app.UseAuthorization();
             app.UseSession();
-
-
+            app.UseMiddleware<ValidationAntiForgeryTokenMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
