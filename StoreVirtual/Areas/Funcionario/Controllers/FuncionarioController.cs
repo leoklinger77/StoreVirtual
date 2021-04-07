@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StoreVirtual.Models.Constants;
 using StoreVirtual.Repositories.Interfaces;
 using StoreVirtual.Service.Email;
 using StoreVirtual.Service.Filter;
@@ -9,7 +10,7 @@ using X.PagedList;
 namespace StoreVirtual.Areas.Funcionario.Controllers
 {
     [Area("Funcionario")]
-    [FuncionarioAuthorization("G")]
+    [FuncionarioAuthorization(FuncionarioTypeConstant.Gerente)]
     public class FuncionarioController : Controller
     {
         private readonly IFuncionarioRepository _funcionarioRepository;
@@ -39,7 +40,7 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
             ModelState.Remove("ConfirmarSenha");
             if (ModelState.IsValid)
             {
-                funcionario.Tipo = "C";
+                funcionario.Tipo = FuncionarioTypeConstant.Comum;
                 funcionario.Senha = KeyGenerator.GetUniqueKey(6);
                 _funcionarioRepository.Insert(funcionario);
                 _sendEmail.EnviarSenha(funcionario);

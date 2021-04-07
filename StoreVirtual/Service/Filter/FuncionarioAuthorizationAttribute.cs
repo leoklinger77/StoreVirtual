@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using StoreVirtual.Models.Constants;
 using StoreVirtual.Service.Login;
 using System;
 
@@ -8,7 +9,7 @@ namespace StoreVirtual.Service.Filter
     public class FuncionarioAuthorizationAttribute : Attribute, IAuthorizationFilter
     {
         private string _tipoColaboradorAuthorization;
-        public FuncionarioAuthorizationAttribute(string TipoColaboradorAuthorization = "C")
+        public FuncionarioAuthorizationAttribute(string TipoColaboradorAuthorization = FuncionarioTypeConstant.Comum)
         {
             _tipoColaboradorAuthorization = TipoColaboradorAuthorization;
         }
@@ -22,7 +23,7 @@ namespace StoreVirtual.Service.Filter
             }
             else
             {
-                if (_loginFuncionario.GetCliente().Tipo == "C" && _tipoColaboradorAuthorization == "G")
+                if (_loginFuncionario.GetCliente().Tipo == FuncionarioTypeConstant.Comum && _tipoColaboradorAuthorization == FuncionarioTypeConstant.Gerente)
                 {
                     context.Result = new ForbidResult();
                 }
