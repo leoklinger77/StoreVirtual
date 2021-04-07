@@ -1,18 +1,22 @@
-﻿using StoreVirtual.Data;
+﻿using Microsoft.Extensions.Configuration;
+using StoreVirtual.Data;
 using StoreVirtual.Models;
 using StoreVirtual.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using X.PagedList;
 
 namespace StoreVirtual.Repositories
 {
     public class ClienteRepository : IClienteRepository
     {
         private readonly StoreVirtualContext _context;
+        private readonly IConfiguration _configuration;
 
-        public ClienteRepository(StoreVirtualContext context)
+        public ClienteRepository(StoreVirtualContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public void Delete(int id)
@@ -22,9 +26,10 @@ namespace StoreVirtual.Repositories
             _context.SaveChanges();
         }
 
-        public ICollection<Cliente> FindAll()
+        public IPagedList<Cliente> FindAll(int?page)
         {
-            return _context.Cliente.ToList();
+            int numberOfPage = page ?? 1;
+            return _context.Cliente.ToPagedList<Cliente>(numberOfPage, _configuration.GetValue<int>("RegistroPorPagina"));
         }
 
         public Cliente FindById(int id)

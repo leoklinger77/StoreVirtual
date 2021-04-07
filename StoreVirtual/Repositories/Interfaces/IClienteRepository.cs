@@ -1,5 +1,6 @@
 ﻿using StoreVirtual.Models;
 using System.Collections.Generic;
+using X.PagedList;
 
 namespace StoreVirtual.Repositories.Interfaces
 {
@@ -7,7 +8,7 @@ namespace StoreVirtual.Repositories.Interfaces
     {
         Cliente Login(string email, string password);
         Cliente FindById(int id);
-        ICollection<Cliente> FindAll();
+        IPagedList<Cliente> FindAll(int?page);
         void Insert(Cliente cliente);
         void Update(Cliente cliente);
         void Delete(int id);
