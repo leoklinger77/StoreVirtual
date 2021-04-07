@@ -67,6 +67,8 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
         }
 
         [HttpGet]
+        [ValidationHttpReferer]
+
         public IActionResult Remove(int id)
         {
             _categoriaRepository.Delete(id);

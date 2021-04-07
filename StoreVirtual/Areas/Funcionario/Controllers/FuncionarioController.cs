@@ -50,6 +50,7 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
             return View();
         }
         [HttpGet]
+        [ValidationHttpReferer]
         public IActionResult ResetPassword(int id)
         {
             Models.Funcionario func = _funcionarioRepository.FindById(id);
@@ -81,6 +82,7 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
             return View();
         }
         [HttpGet]
+        [ValidationHttpReferer]
         public IActionResult Remove(int id)
         {
             _funcionarioRepository.Delete(id);

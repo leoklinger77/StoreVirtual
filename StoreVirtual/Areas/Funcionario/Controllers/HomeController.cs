@@ -36,6 +36,7 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
         }
         [HttpGet]
         [FuncionarioAuthorization]
+        [ValidationHttpReferer]
         public IActionResult Forgot()
         {
             _loginFuncionario.Remove();
