@@ -1,0 +1,12 @@
+﻿.imagens .btn-image-excluir {
+    width: 100%;
+    margin-bottom: 30px;
+    border-top-left-radius: 0;
+    border-top-right-radius:0;
+}
+.imagens div {
+    text-align: center;
+}
+.imagens .img-thumbnail{
+    width:100%;
+}

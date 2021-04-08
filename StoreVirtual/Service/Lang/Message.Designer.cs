@@ -106,6 +106,15 @@ namespace StoreVirtual.Service.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Valor mínimo é {1} e máximo é {2}.
+        /// </summary>
+        public static string MSG_E006 {
+            get {
+                return ResourceManager.GetString("MSG_E006", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Registro salvo com sucesso!.
         /// </summary>
         public static string MSG_S006 {

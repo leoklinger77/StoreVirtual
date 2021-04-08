@@ -132,6 +132,9 @@
   <data name="MSG_E005" xml:space="preserve">
     <value>O valor não confere com {1}</value>
   </data>
+  <data name="MSG_E006" xml:space="preserve">
+    <value>Valor mínimo é {1} e máximo é {2}</value>
+  </data>
   <data name="MSG_S006" xml:space="preserve">
     <value>Registro salvo com sucesso!</value>
   </data>

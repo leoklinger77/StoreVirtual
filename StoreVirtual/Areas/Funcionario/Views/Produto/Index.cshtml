@@ -4,9 +4,6 @@
     var search = Context.Request.Query["search"];
 }
 <h1>Produto</h1>
-
-<br />
-<br />
 <form method="get">
     <div class="form-group">
         <label for="search"></label>
@@ -15,7 +12,8 @@
 
     <button type="submit" class="btn btn-primary">Pesquisar</button>
 </form>
-
+<br />
+<a asp-action="Insert" class="btn btn-primary">Casdastrar</a>
 <br />
 <br />
 @if (@TempData["MSG_S"] != null)
