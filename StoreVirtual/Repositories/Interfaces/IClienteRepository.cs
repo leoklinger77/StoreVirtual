@@ -8,7 +8,7 @@ namespace StoreVirtual.Repositories.Interfaces
     {
         Cliente Login(string email, string password);
         Cliente FindById(int id);
-        IPagedList<Cliente> FindAll(int?page);
+        IPagedList<Cliente> FindAll(int?page, string search);
         void Insert(Cliente cliente);
         void Update(Cliente cliente);
         void Delete(int id);

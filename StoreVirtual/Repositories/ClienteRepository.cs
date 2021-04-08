@@ -26,10 +26,18 @@ namespace StoreVirtual.Repositories
             _context.SaveChanges();
         }
 
-        public IPagedList<Cliente> FindAll(int?page)
+        public IPagedList<Cliente> FindAll(int?page, string search)
         {
             int numberOfPage = page ?? 1;
-            return _context.Cliente.ToPagedList<Cliente>(numberOfPage, _configuration.GetValue<int>("RegistroPorPagina"));
+
+            var dbClient = _context.Cliente.AsQueryable();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                dbClient = dbClient.Where(x => x.Nome.Contains(search.Trim()) || x.Email.Contains(search.Trim()));
+            }           
+
+            return dbClient.ToPagedList<Cliente>(numberOfPage, _configuration.GetValue<int>("RegistroPorPagina"));
         }
 
         public Cliente FindById(int id)

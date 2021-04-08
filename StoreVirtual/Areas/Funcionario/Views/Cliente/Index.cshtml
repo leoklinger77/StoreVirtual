@@ -2,8 +2,20 @@
 @model IPagedList<StoreVirtual.Models.Cliente>
 @{
     ViewData["Title"] = "Index";
+    var search = Context.Request.Query["search"];
 }
 <h1>Funcionario</h1>
+
+<br />
+<br />
+<form method="get">
+    <div class="form-group">
+        <label for="search"></label>
+        <input name="search" id="search" value="@search" class="form-control" type="text" placeholder="Digite o nome ou e-mail do cliente" />        
+    </div>    
+
+    <button type="submit" class="btn btn-primary">Pesquisar</button>    
+</form>
 
 <br />
 <br />
@@ -44,7 +56,7 @@
                 }
             </tbody>
         </table>
-        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page  = page, search = search}))
     </div>
 }
 else

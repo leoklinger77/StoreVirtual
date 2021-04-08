@@ -23,9 +23,9 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
             _clienteRepository = clienteRepository;
         }
 
-        public IActionResult Index(int? page)
+        public IActionResult Index(int? page, string search)
         {
-            IPagedList<Cliente> clientes = _clienteRepository.FindAll(page);
+            IPagedList<Cliente> clientes = _clienteRepository.FindAll(page, search);
             return View(clientes);
         }
         [ValidationHttpReferer]
