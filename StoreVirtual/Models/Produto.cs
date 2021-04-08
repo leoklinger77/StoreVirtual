@@ -21,6 +21,6 @@ namespace StoreVirtual.Models
         public virtual Categoria Categoria { get; set; }
         public int CategoriaId { get; set; }
 
-        public virtual ICollection<Image> Imagens { get; set; }
+        public virtual ICollection<Imagem> Imagens { get; set; }
     }
 }

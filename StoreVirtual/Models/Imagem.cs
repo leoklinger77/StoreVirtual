@@ -2,7 +2,7 @@
 
 namespace StoreVirtual.Models
 {
-    public class Image
+    public class Imagem
     {
         public int Id { get; set; }
         public string Caminho { get; set; }

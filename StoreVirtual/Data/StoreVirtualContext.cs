@@ -15,6 +15,6 @@ namespace StoreVirtual.Data
         public DbSet<Funcionario> Funcionario { get; set; }
         public DbSet<Categoria> Categoria { get; set; }
         public DbSet<Produto> Produto { get; set; }
-        public DbSet<Image> Image { get; set; }
+        public DbSet<Imagem> Image { get; set; }
     }
 }

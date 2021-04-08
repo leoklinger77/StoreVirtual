@@ -78,6 +78,8 @@ namespace StoreVirtual
             services.AddScoped<INewsLetterEmailRepository, NewsLetterEmailRepository>();
             services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IImagemRepository, ImagemRepository>();
 
 
         }
