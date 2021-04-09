@@ -21,7 +21,7 @@ namespace StoreVirtual.Service.File
 
         public static bool RemoveImage(string caminho)
         {
-            string caminhoArmez = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/Temp", caminho.TrimStart('/'));
+            string caminhoArmez = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", caminho.TrimStart('/'));
 
             if (System.IO.File.Exists(caminhoArmez))
             {
