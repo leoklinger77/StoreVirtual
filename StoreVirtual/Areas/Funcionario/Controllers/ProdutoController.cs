@@ -48,5 +48,25 @@ namespace StoreVirtual.Areas.Funcionario.Controllers
             ViewBag.Categoria = _categoriaRepository.FindAlls().Select(x => new SelectListItem(x.Nome, x.Id.ToString()));
             return View();
         }
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            Produto produto = _produtoRepository.FindById(id);
+            ViewBag.Categoria = _categoriaRepository.FindAlls().Select(x => new SelectListItem(x.Nome, x.Id.ToString()));
+            return View(produto);
+        }
+        [HttpPost]
+        public IActionResult Update(Produto produto)
+        {
+            if (ModelState.IsValid)
+            {
+                _produtoRepository.Update(produto);
+                TempData["MSG_S"] = Message.MSG_S006;
+                return RedirectToAction(nameof(Index));
+            }
+            ViewBag.Categoria = _categoriaRepository.FindAlls().Select(x => new SelectListItem(x.Nome, x.Id.ToString()));
+            return View(produto);
+        }
+
     }
 }
